@@ -1,33 +1,25 @@
 package hexlet.code.schemas;
 
-public class StringSchema {
-    private String type = "";
-    private final String required = "required";
+public class StringSchema extends BaseSchema {
     private final String minLength = "minLength";
     private final String contains = "contains";
-    private int min;
     private String subStr;
 
     public StringSchema contains(String str) {
-        type = contains;
+        setType(contains);
         subStr = str;
         return this;
     }
 
-    public StringSchema required() {
-        type = required;
-        return this;
-    }
-
     public StringSchema minLength(int min) {
-        this.min = min;
-        type = minLength;
+        setMin(min);
+        setType(minLength);
         return this;
     }
 
     public boolean isValid(String str) {
 
-        switch (type) {
+        switch (getType()) {
             case contains:
                 if (str == null) {
                     return false;
@@ -42,8 +34,9 @@ public class StringSchema {
                 if (str == null) {
                     return true;
                 }
-                return str.length() >= min;
+                return str.length() >= getMin();
+            default:
+                return true;
         }
-        return true;
     }
 }
