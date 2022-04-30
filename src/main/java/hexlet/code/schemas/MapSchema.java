@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema {
     private int size;
     private final String sizeof = "sizeof";
     private final String required = "required";
@@ -13,8 +13,7 @@ public class MapSchema extends BaseSchema {
         size = n;
         return this;
     }
-
-
+    
     public boolean isValid(Object object) {
 
         switch (getType()) {

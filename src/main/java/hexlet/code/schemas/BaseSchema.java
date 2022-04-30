@@ -14,13 +14,6 @@ public class BaseSchema {
         return this;
     }
 
-    /**
-     *
-     * @return boolean
-     */
-    public boolean isValid() {
-       return true;
-    }
     /** @param m
      */
     public void setMin(int m) {
