@@ -3,24 +3,47 @@ package hexlet.code.schemas;
 public class BaseSchema {
     private String type = "";
     private int min;
-    public final String required = "required";
+    private final String required = "required";
 
+    /**
+     * This implementation ...
+     @return this.
+     */
     public BaseSchema required() {
         type = required;
         return this;
     }
+
+    /**
+     *
+     * @return boolean
+     */
+    public boolean isValid() {
+       return true;
+    }
+    /** @param m
+     */
     public void setMin(int m) {
         this.min = m;
     }
-
+    /**
+     * This implementation ...
+     @return min.
+     */
     public Integer getMin() {
         return min;
     }
+    /**
+     * @param t
+     */
+    public void setType(String t) {
+        this.type = t;
 
-    public void setType(String type) {
-        this.type = type;
     }
-
+    /**
+     * This implementation ...
+     @return type.
+     */
     public String getType() {
         return type;
     }

@@ -1,10 +1,10 @@
 package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema {
     private final String minLength = "minLength";
     private final String contains = "contains";
+    private final String required = "required";
     private String subStr;
-
     public StringSchema contains(String str) {
         setType(contains);
         subStr = str;

@@ -8,7 +8,7 @@ check-updates:
 	./gradlew dependencyUpdates
 
 lint:
-	./gradlew checkstyleMain checkstyleTest
+	./gradlew checkstyleMain
 
 test:
 	./gradlew test
@@ -16,7 +16,7 @@ test:
 .PHONY: build
 
 build:
-	./gradlew clean install checkstyleMain checkstyleTest test
+	./gradlew clean install checkstyleMain test
 
 report:
 	./gradlew jacocoTestReport

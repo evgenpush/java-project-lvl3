@@ -1,8 +1,9 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema {
     private final String positive = "positive";
     private final String range = "range";
+    private final String required = "required";
     private int max;
 
 
@@ -19,7 +20,6 @@ public class NumberSchema extends BaseSchema {
     }
 
     public boolean isValid(Object x) {
-
         switch (getType()) {
             case required:
                 if (!isNotInteger(x)) {
