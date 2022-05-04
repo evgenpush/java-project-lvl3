@@ -1,5 +1,7 @@
 package hexlet.code.schemas;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public final class StringSchema extends BaseSchema {
     private final String minLength = "minLength";
     private final String contains = "contains";
@@ -17,7 +19,9 @@ public final class StringSchema extends BaseSchema {
         return this;
     }
 
-    public boolean isValid(String str) {
+    public boolean isValid(Object object) {
+        ObjectMapper oMapper = new ObjectMapper();
+        String str = oMapper.convertValue(object, String.class);
 
         switch (getType()) {
             case contains:

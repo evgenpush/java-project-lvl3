@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class BaseSchema {
+public abstract class BaseSchema {
     private String type = "";
     private int min;
     private final String required = "required";
@@ -40,4 +40,6 @@ public class BaseSchema {
     public String getType() {
         return type;
     }
+
+    public abstract boolean isValid(Object object);
 }
