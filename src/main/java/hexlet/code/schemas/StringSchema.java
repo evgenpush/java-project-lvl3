@@ -22,25 +22,33 @@ public final class StringSchema extends BaseSchema {
     public boolean isValid(Object object) {
         ObjectMapper oMapper = new ObjectMapper();
         String str = oMapper.convertValue(object, String.class);
+        Boolean isResult;
 
         switch (getType()) {
             case contains:
                 if (str == null) {
-                    return false;
+                    isResult = false;
+                    break;
                 }
-                return str.contains(subStr);
+                isResult = str.contains(subStr);
+                break;
             case required:
                 if (str == null) {
-                    return false;
+                    isResult = false;
+                    break;
                 }
-                return str.length() > 0;
+                isResult = str.length() > 0;
+                break;
             case minLength:
                 if (str == null) {
-                    return true;
+                    isResult = true;
+                    break;
                 }
-                return str.length() >= getMin();
+                isResult = str.length() >= getMin();
+                break;
             default:
-                return true;
+                isResult = true;
         }
+        return isResult;
     }
 }

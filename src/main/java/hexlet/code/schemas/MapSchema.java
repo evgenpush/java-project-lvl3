@@ -20,34 +20,43 @@ public final class MapSchema extends BaseSchema {
 
     public boolean isValid(Object object) {
         Map<String, String> map;
+        Boolean isResult = true;
         switch (getType()) {
             case required:
-                return isMap(object);
+                isResult = isMap(object);
+                break;
             case sizeof:
                 if (!(isMap(object))) {
-                    return false;
+                    isResult = false;
+                    break;
                 }
                 map = objectToMap(object);
-                return map.size() == size;
+                isResult = map.size() == size;
+                break;
             case shape:
                 if (!(isMap(object))) {
-                    return false;
+                    isResult = false;
+                    break;
                 }
                 map = objectToMap(object);
                 for (Map.Entry entry : map.entrySet()) {
                     String key = (String) entry.getKey();
                     Object value = entry.getValue();
                     if (!shapeSchemas.containsKey(key)) {
-                        return false;
+                        isResult = false;
+                        break;
                     }
                     BaseSchema schema = shapeSchemas.get(key);
                     if (!schema.isValid(value)) {
-                        return false;
+                        isResult = false;
+                        break;
                     }
                 }
+                break;
             default:
-                return true;
+                isResult = true;
         }
+        return isResult;
     }
 
     public boolean isMap(Object object) {
