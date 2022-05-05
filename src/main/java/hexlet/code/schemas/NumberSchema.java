@@ -6,11 +6,6 @@ public final class NumberSchema extends BaseSchema {
     private final String required = "required";
     private int max;
 
-    public NumberSchema required() {
-        super.required();
-        return this;
-    }
-
     public NumberSchema positive() {
         setType(positive);
         return this;
@@ -41,7 +36,7 @@ public final class NumberSchema extends BaseSchema {
                     isResult = false;
                     break;
                 }
-                if ((Integer) object >= 0) {
+                if ((Integer) object > 0) {
                     isResult = true;
                     break;
                 }
