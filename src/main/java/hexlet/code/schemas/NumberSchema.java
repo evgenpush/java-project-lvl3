@@ -19,20 +19,19 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public boolean isValid(Object object) {
-        Boolean isResult = false;
-
+        Boolean isResult;
         switch (getType()) {
             case required:
-                if (isInteger(object)) {
-                    isResult = true;
+                if (isNotInteger(object)) {
+                    isResult = false;
+                    break;
                 }
-                break;
             case positive:
                 if (object == null) {
                     isResult = true;
                     break;
                 }
-                if (!isInteger(object)) {
+                if (isNotInteger(object)) {
                     isResult = false;
                     break;
                 }
@@ -40,8 +39,10 @@ public final class NumberSchema extends BaseSchema {
                     isResult = true;
                     break;
                 }
+                isResult = false;
+                break;
             case range:
-                if (!isInteger(object)) {
+                if (isNotInteger(object)) {
                     isResult = false;
                     break;
                 }
@@ -57,7 +58,7 @@ public final class NumberSchema extends BaseSchema {
         return isResult;
     }
 
-    public boolean isInteger(Object object) {
-        return object instanceof Integer;
+    public boolean isNotInteger(Object object) {
+        return !(object instanceof Integer);
     }
 }
