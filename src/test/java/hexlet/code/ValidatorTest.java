@@ -15,6 +15,16 @@ import static org.junit.Assert.assertTrue;
 
 public final class ValidatorTest {
     private Validator v;
+    private final int four = 4;
+    private final int five = 5;
+    private final int seven = 7;
+    private final int ten = 10;
+    private final int two = 2;
+    private final int eight = 8;
+    private final int eleven = 11;
+    private final int hundred = 100;
+    private final int minusTen = -10;
+    private final int minusFive = -5;
 
     @BeforeEach
     public void init() {
@@ -37,10 +47,10 @@ public final class ValidatorTest {
         schemaStr.contains("wwwhat");
         assertFalse(schemaStr.isValid("what does the fox say"));
 
-        schemaStr.minLength(4);
+        schemaStr.minLength(four);
         assertTrue(schemaStr.isValid("what does the fox say"));
-        assertFalse(schemaStr.minLength(7).isValid("Hello"));
-        schemaStr.minLength(5);
+        assertFalse(schemaStr.minLength(seven).isValid("Hello"));
+        schemaStr.minLength(five);
         assertTrue(schemaStr.isValid("Hello"));
         assertTrue(schemaStr.isValid(null));
     }
@@ -52,25 +62,23 @@ public final class ValidatorTest {
         assertTrue(schema.isValid("5"));
         assertTrue(schema.isValid(null));
         schema.required();
-        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(five));
         assertFalse(schema.isValid("5"));
 
-        assertTrue(schema.positive().isValid(10));
-        assertFalse(schema.isValid(-10));
+        assertTrue(schema.positive().isValid(ten));
+        assertFalse(schema.isValid(minusTen));
 
-        schema.range(5, 10);
-        assertTrue(schema.isValid(5));
-        assertTrue(schema.isValid(8));
-        assertTrue(schema.isValid(10));
+        schema.range(five, ten);
+        assertTrue(schema.isValid(five));
+        assertTrue(schema.isValid(eight));
+        assertTrue(schema.isValid(ten));
         assertFalse(schema.isValid(-1));
-        assertFalse(schema.isValid(11));
-        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(eleven));
+        assertFalse(schema.isValid(four));
     }
 
     @Test
     public void testMapSchema() {
-        Validator v = new Validator();
-
         MapSchema schema = v.map();
 
         assertTrue(schema.isValid(null)); // true
@@ -84,7 +92,7 @@ public final class ValidatorTest {
         data.put("key1", "value1");
         assertTrue(schema.isValid(data)); // true
 
-        schema.sizeof(2);
+        schema.sizeof(two);
 
         assertFalse(schema.isValid(data));  // false
         data.put("key2", "value2");
@@ -93,8 +101,6 @@ public final class ValidatorTest {
 
     @Test
     public void testMapSchemaDeep() {
-        Validator v = new Validator();
-
         MapSchema schema = v.map();
 
 // shape - позволяет описывать валидацию для значений объекта Map по ключам.
@@ -105,7 +111,7 @@ public final class ValidatorTest {
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);
+        human1.put("age", hundred);
         assertTrue(schema.isValid(human1)); // true
 
         Map<String, Object> human2 = new HashMap<>();
@@ -120,7 +126,7 @@ public final class ValidatorTest {
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", -5);
+        human4.put("age", minusFive);
         assertFalse(schema.isValid(human4)); // false
     }
 }
