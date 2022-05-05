@@ -71,6 +71,7 @@ public final class ValidatorTest {
         assertTrue(schema.positive().isValid(ten));
         assertFalse(schema.isValid(minusTen));
         assertTrue(schema.positive().isValid(null));
+        assertTrue(schema.isValid(0));
 
         schema.range(five, ten);
         assertTrue(schema.isValid(five));

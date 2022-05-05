@@ -41,7 +41,7 @@ public final class NumberSchema extends BaseSchema {
                     isResult = false;
                     break;
                 }
-                if ((Integer) object > 0) {
+                if ((Integer) object >= 0) {
                     isResult = true;
                     break;
                 }
