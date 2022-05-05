@@ -34,7 +34,7 @@ public final class NumberSchema extends BaseSchema {
                 break;
             case positive:
                 if (object == null) {
-                    isResult = false;
+                    isResult = true;
                     break;
                 }
                 if (isNotInteger(object)) {

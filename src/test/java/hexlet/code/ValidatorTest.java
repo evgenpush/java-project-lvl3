@@ -25,6 +25,7 @@ public final class ValidatorTest {
     private final int hundred = 100;
     private final int minusTen = -10;
     private final int minusFive = -5;
+    private final int minusOne = -1;
 
     @BeforeEach
     public void init() {
@@ -48,11 +49,11 @@ public final class ValidatorTest {
         assertFalse(schemaStr.isValid("what does the fox say"));
 
         schemaStr.minLength(four);
+        assertFalse(schemaStr.isValid(null));
         assertTrue(schemaStr.isValid("what does the fox say"));
         assertFalse(schemaStr.minLength(seven).isValid("Hello"));
         schemaStr.minLength(five);
         assertTrue(schemaStr.isValid("Hello"));
-        assertTrue(schemaStr.isValid(null));
     }
 
     @Test
@@ -69,14 +70,16 @@ public final class ValidatorTest {
 
         assertTrue(schema.positive().isValid(ten));
         assertFalse(schema.isValid(minusTen));
+        assertTrue(schema.positive().isValid(null));
 
         schema.range(five, ten);
         assertTrue(schema.isValid(five));
         assertTrue(schema.isValid(eight));
         assertTrue(schema.isValid(ten));
-        assertFalse(schema.isValid(-1));
+        assertFalse(schema.isValid(minusOne));
         assertFalse(schema.isValid(eleven));
         assertFalse(schema.isValid(four));
+        assertFalse(schema.range(eight, ten).isValid(five));
     }
 
     @Test
@@ -116,10 +119,10 @@ public final class ValidatorTest {
         human1.put("age", hundred);
         assertTrue(schema.isValid(human1)); // true
 
-//        Map<String, Object> human2 = new HashMap<>();
-//        human2.put("name", "Maya");
-//        human2.put("age", null); // true
-//        assertTrue(schema.isValid(human2));
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null); // true
+        assertTrue(schema.isValid(human2));
 
         Map<String, Object> human3 = new HashMap<>();
         human3.put("name", "");

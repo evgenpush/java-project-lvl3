@@ -47,7 +47,7 @@ public final class StringSchema extends BaseSchema {
                 break;
             case minLength:
                 if (str == null) {
-                    isResult = true;
+                    isResult = false;
                     break;
                 }
                 isResult = str.length() >= getMin();
