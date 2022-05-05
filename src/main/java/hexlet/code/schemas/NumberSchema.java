@@ -28,7 +28,7 @@ public final class NumberSchema extends BaseSchema {
 
         switch (getType()) {
             case required:
-                if (!isNotInteger(object)) {
+                if (isInteger(object)) {
                     isResult = true;
                 }
                 break;
@@ -37,7 +37,7 @@ public final class NumberSchema extends BaseSchema {
                     isResult = true;
                     break;
                 }
-                if (isNotInteger(object)) {
+                if (!isInteger(object)) {
                     isResult = false;
                     break;
                 }
@@ -45,10 +45,8 @@ public final class NumberSchema extends BaseSchema {
                     isResult = true;
                     break;
                 }
-                isResult = false;
-                break;
             case range:
-                if (isNotInteger(object)) {
+                if (!isInteger(object)) {
                     isResult = false;
                     break;
                 }
@@ -64,7 +62,7 @@ public final class NumberSchema extends BaseSchema {
         return isResult;
     }
 
-    public boolean isNotInteger(Object object) {
-        return !(object instanceof Integer);
+    public boolean isInteger(Object object) {
+        return object instanceof Integer;
     }
 }
