@@ -128,5 +128,9 @@ public final class ValidatorTest {
         human4.put("name", "Valya");
         human4.put("age", minusFive);
         assertFalse(schema.isValid(human4)); // false
+
+        schemas.put("name", v.string().required().contains("ya"));
+        human4.put("age", minusFive);
+        assertFalse(schema.isValid(human4)); // false
     }
 }

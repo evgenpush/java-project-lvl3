@@ -12,6 +12,11 @@ public final class MapSchema extends BaseSchema {
     private final String shape = "shape";
     private Map<String, BaseSchema> shapeSchemas;
 
+    public MapSchema required() {
+        super.required();
+        return this;
+    }
+
     public MapSchema sizeof(int n) {
         setType(sizeof);
         size = n;

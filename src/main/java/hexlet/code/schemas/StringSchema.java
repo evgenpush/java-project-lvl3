@@ -7,6 +7,12 @@ public final class StringSchema extends BaseSchema {
     private final String contains = "contains";
     private final String required = "required";
     private String subStr;
+
+    public StringSchema required() {
+        super.required();
+        return this;
+    }
+
     public StringSchema contains(String str) {
         setType(contains);
         subStr = str;
