@@ -28,30 +28,22 @@ public final class NumberSchema extends BaseSchema {
                     break;
                 }
             case positive:
-                if (object == null) {
-                    isResult = true;
+                isResult = object == null;
+                if (isResult) {
                     break;
                 }
-                if (isNotInteger(object)) {
-                    isResult = false;
+                isResult = isInt;
+                if (!isResult) {
                     break;
                 }
-                if ((Integer) object > 0) {
-                    isResult = true;
-                    break;
-                }
-                isResult = false;
+                isResult = (Integer) object > 0;
                 break;
             case range:
-                if (isNotInteger(object)) {
-                    isResult = false;
+                isResult = isInt;
+                if (!isResult) {
                     break;
                 }
-                if ((Integer) object >= getMin() && (Integer) object <= max) {
-                    isResult = true;
-                    break;
-                }
-                isResult = false;
+                isResult = (Integer) object >= getMin() && (Integer) object <= max;
                 break;
             default:
                 isResult = true;
