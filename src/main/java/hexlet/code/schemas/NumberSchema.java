@@ -26,15 +26,19 @@ public final class NumberSchema extends BaseSchema {
                 isResult = isInt;
                 break;
             case positive:
-                isResult = object == null;
-                if (isResult) {
+                if (object == null) {
+                    isResult = true;
                     break;
                 }
-                isResult = isInt;
-                if (!isResult) {
+                if (isNotInteger(object)) {
+                    isResult = false;
                     break;
                 }
-                isResult = (Integer) object > 0;
+                if ((Integer) object > 0) {
+                    isResult = true;
+                    break;
+                }
+                isResult = false;
                 break;
             case range:
                 if (isNotInteger(object)) {
