@@ -38,6 +38,7 @@ public final class ValidatorTest {
 
         assertTrue(schemaStr.isValid(""));
         assertTrue(schemaStr.isValid(null));
+
         schemaStr.required();
         assertTrue(schemaStr.isValid("what does the fox say"));
         assertFalse(schemaStr.isValid(""));
@@ -60,18 +61,10 @@ public final class ValidatorTest {
     public void testNumberSchema() {
         NumberSchema schema = v.number();
 
-        assertTrue(schema.isValid("5"));
+        assertTrue(schema.isValid("hello"));
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(five));
-        schema.required();
-        assertTrue(schema.isValid(five));
-        assertFalse(schema.isValid("5"));
-        assertFalse(schema.isValid(null));
-
-        assertTrue(schema.positive().isValid(ten));
-        assertFalse(schema.isValid(minusTen));
-        assertTrue(schema.positive().isValid(null));
-        assertFalse(schema.isValid("4"));
+        assertTrue(schema.isValid("4"));
 
         schema.range(five, ten);
         assertTrue(schema.isValid(five));
@@ -83,6 +76,33 @@ public final class ValidatorTest {
         assertFalse(schema.range(eight, ten).isValid(five));
         assertFalse(schema.isValid("4"));
     }
+
+    @Test
+    public void testNumberSchemaRequest() {
+        NumberSchema schema = v.number();
+
+        assertTrue(schema.isValid("5"));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(five));
+        schema.required();
+        assertTrue(schema.isValid(five));
+        assertFalse(schema.isValid("5"));
+        assertFalse(schema.isValid(null));
+    }
+
+    @Test
+    public void testNumberSchemaPositive() {
+        NumberSchema schema = v.number();
+
+        assertTrue(schema.isValid("hello"));
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(five));
+        assertTrue(schema.positive().isValid(ten));
+        assertFalse(schema.isValid(minusTen));
+        assertTrue(schema.positive().isValid(null));
+        assertFalse(schema.isValid("4"));
+    }
+
 
     @Test
     public void testMapSchema() {

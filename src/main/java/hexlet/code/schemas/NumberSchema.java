@@ -37,11 +37,15 @@ public final class NumberSchema extends BaseSchema {
                 isResult = (Integer) object > 0;
                 break;
             case range:
-                isResult = isInt;
-                if (!isResult) {
+                if (isNotInteger(object)) {
+                    isResult = false;
                     break;
                 }
-                isResult = (Integer) object >= getMin() && (Integer) object <= max;
+                if ((Integer) object >= getMin() && (Integer) object <= max) {
+                    isResult = true;
+                    break;
+                }
+                isResult = false;
                 break;
             default:
                 isResult = true;
@@ -51,5 +55,9 @@ public final class NumberSchema extends BaseSchema {
 
     public boolean isInteger(Object object) {
         return object instanceof Integer;
+    }
+
+    public boolean isNotInteger(Object object) {
+        return !(object instanceof Integer);
     }
 }
