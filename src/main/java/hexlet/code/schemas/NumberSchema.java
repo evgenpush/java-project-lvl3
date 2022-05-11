@@ -23,8 +23,10 @@ public final class NumberSchema extends BaseSchema {
         Boolean isInt = isInteger(object);
         switch (getType()) {
             case required:
-                isResult = isInt;
-                break;
+                if (isNotInteger(object)) {
+                    isResult = false;
+                    break;
+                }
             case positive:
                 if (object == null) {
                     isResult = true;
