@@ -71,6 +71,7 @@ public final class ValidatorTest {
         assertTrue(schema.positive().isValid(ten));
         assertFalse(schema.isValid(minusTen));
         assertTrue(schema.positive().isValid(null));
+        assertFalse(schema.isValid("4"));
 
         schema.range(five, ten);
         assertTrue(schema.isValid(five));
@@ -80,6 +81,7 @@ public final class ValidatorTest {
         assertFalse(schema.isValid(eleven));
         assertFalse(schema.isValid(four));
         assertFalse(schema.range(eight, ten).isValid(five));
+        assertFalse(schema.isValid("4"));
     }
 
     @Test
