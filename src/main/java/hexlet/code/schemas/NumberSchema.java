@@ -19,7 +19,7 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public boolean isValid(Object object) {
-        Boolean isResult = false;
+        Boolean isResult;
         Boolean isInt = isInteger(object);
         switch (getType()) {
             case required:
@@ -30,13 +30,15 @@ public final class NumberSchema extends BaseSchema {
                 if (isResult) {
                     break;
                 }
-                if (!isInt) {
+                isResult = isInt;
+                if (!isResult) {
                     break;
                 }
                 isResult = (Integer) object > 0;
                 break;
             case range:
-                if (!isInt) {
+                isResult = isInt;
+                if (!isResult) {
                     break;
                 }
                 isResult = (Integer) object >= getMin() && (Integer) object <= max;
