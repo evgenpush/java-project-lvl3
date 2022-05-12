@@ -45,16 +45,16 @@ public final class ValidatorTest {
         assertFalse(schemaStr.isValid(null));
         assertTrue(schemaStr.isValid("Hello"));
 
-        assertTrue(schemaStr.contains("what").isValid("what does the fox say"));
-        schemaStr.contains("wwwhat");
-        assertFalse(schemaStr.isValid("what does the fox say"));
-
         schemaStr.minLength(four);
         assertFalse(schemaStr.isValid(null));
         assertTrue(schemaStr.isValid("what does the fox say"));
         assertFalse(schemaStr.minLength(seven).isValid("Hello"));
         schemaStr.minLength(five);
         assertTrue(schemaStr.isValid("Hello"));
+
+        assertTrue(schemaStr.contains("what").isValid("what does the fox say"));
+        schemaStr.contains("wwwhat");
+        assertFalse(schemaStr.isValid("what does the fox say"));
     }
 
     @Test

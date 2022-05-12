@@ -1,45 +1,26 @@
 package hexlet.code.schemas;
 
-public abstract class BaseSchema {
-    private String type = "";
-    private int min;
-    private final String required = "required";
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 
-    /**
-     * This implementation ...
-     @return this.
-     */
-    public BaseSchema required() {
-        type = required;
-        return this;
+public class BaseSchema {
+
+    private Map<String, Predicate> checks = new HashMap<>();
+
+    protected final void addChecks(String type, Predicate check) {
+        checks.put(type, check);
     }
 
-    /** @param m
+    /** @param object
+     * @return valid test.
      */
-    public void setMin(int m) {
-        this.min = m;
+    public Boolean isValid(Object object) {
+        for (Map.Entry<String, Predicate> entry : checks.entrySet()) {
+            if (!entry.getValue().test(object)) {
+                return false;
+            }
+        }
+        return true;
     }
-    /**
-     * This implementation ...
-     @return min.
-     */
-    public Integer getMin() {
-        return min;
-    }
-    /**
-     * @param t
-     */
-    public void setType(String t) {
-        this.type = t;
-
-    }
-    /**
-     * This implementation ...
-     @return type.
-     */
-    public String getType() {
-        return type;
-    }
-
-    public abstract boolean isValid(Object object);
 }
