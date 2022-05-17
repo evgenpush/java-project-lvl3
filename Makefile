@@ -16,7 +16,7 @@ test:
 .PHONY: build
 
 build:
-	./gradlew clean install checkstyleMain test
+	./gradlew clean checkstyleMain test
 
 report:
 	./gradlew jacocoTestReport

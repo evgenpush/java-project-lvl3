@@ -7,7 +7,7 @@
 
 
 plugins {
-    id 'application'
+    id 'java'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'checkstyle'
     id 'jacoco'
@@ -16,26 +16,21 @@ plugins {
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
 
-application {
-    mainClass = 'hexlet.code.App'
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'info.picocli:picocli:4.6.3'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
     testCompileOnly 'junit:junit:4.13'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 }
 
-//compileJava {
-//    options.release = 17
-//}
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+compileJava {
+    options.release = 17
+}
 
 test {
     useJUnitPlatform()
